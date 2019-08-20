@@ -1,0 +1,68 @@
+version: '3'
+services:
+  selenoid:
+    image: "aerokube/selenoid:latest-release"
+    network_mode: bridge
+    ports:
+      - "4445:4444"
+    volumes:
+      - "./selenoid/config:/etc/selenoid/"
+      - "//var/run/docker.sock:/var/run/docker.sock"
+
+  selenoid-ui:
+    restart: always
+    network_mode: bridge
+    image: aerokube/selenoid-ui
+    ports:
+      - "8081:8081"
+    links:
+      - ggr-ui
+    depends_on:
+      - ggr-ui
+    command: ["-listen", ":8081", "--selenoid-uri", "http://ggr-ui:8888"]
+
+  ggr:
+    restart: always
+    network_mode: bridge
+    image: "aerokube/ggr:latest-release"
+    ports:
+      - "4444:4444"
+    links:
+      - selenoid
+      - appium-android
+    depends_on:
+      - selenoid
+      - appium-android
+    volumes:
+      - "./grid-router/:/etc/grid-router:ro"
+
+  ggr-ui:
+    restart: always
+    network_mode: bridge
+    image: aerokube/ggr-ui
+    ports:
+      - "8888:8888"
+    depends_on:
+      - selenoid
+      - appium-android
+    links:
+      - selenoid
+      - appium-android
+    volumes:
+      - "./grid-router/:/etc/grid-router:ro"
+
+  appium-android:
+    image: butomo1989/docker-android-arm-7.1.1
+    privileged: true
+    network_mode: bridge
+    ports:
+      - 6080:6080
+      - 4723:4723
+      - 5554:5554
+      - 5555:5555
+    volumes:
+      - ./android_video:/tmp/video
+    environment:
+      - DEVICE=Nexus 5
+      - APPIUM=true
+      - AUTO_RECORD=true

@@ -1,0 +1,47 @@
+<qa:browsers xmlns:qa="urn:config.gridrouter.qatools.ru">
+    <browser name="firefox" defaultVersion="68.0">
+        <version number="68.0">
+            <region name="1">
+                <host name="selenoid" port="4444" count="1"/>
+            </region>
+        </version>
+    </browser>
+    <browser name="chrome" defaultVersion="76.0">
+        <version number="76.0">
+            <region name="1">
+                <host name="selenoid" port="4444" count="1"/>
+            </region>
+        </version>
+        <version number="mobile-75.0">
+            <region name="1">
+                <host name="172.18.52.254" port="4447" count="1"/>
+            </region>
+        </version>
+        <version number="mobile-76.0">
+            <region name="1">
+                <host name="appium-android" port="4723" count="1"/>
+            </region>
+        </version>
+    </browser>
+    <browser name="opera" defaultVersion="60.0">
+        <version number="60.0">
+        <region name="1">
+            <host name="selenoid" port="4444" count="1"/>
+        </region>
+    </version>
+    </browser>
+    <browser name="internet explorer" defaultVersion="11">
+        <version number="11">
+            <region name="1">
+                <host name="host.docker.internal" port="4446" count="1"/>
+            </region>
+        </version>
+    </browser>
+    <browser name="android" defaultVersion="7.1.1" defaultPlatform="Android">
+        <version number="7.1.1" platform="Android">
+            <region name="1">
+                <host name="appium-android" port="4723" count="1"/>
+            </region>
+        </version>
+    </browser>
+</qa:browsers>

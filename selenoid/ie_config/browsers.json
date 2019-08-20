@@ -1,0 +1,11 @@
+{
+  "internet explorer":
+    {
+        "default": "11",
+        "versions": {
+          "11": {
+            "image": ["G:\\Development\\selenoid_config\\headless-selenium-for-win-v1-4\\IEDriverServer.exe"]
+            }
+        }
+    }
+}

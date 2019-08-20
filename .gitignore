@@ -1,0 +1,5 @@
+venv
+android_video
+GoogleChromeMobile*
+headless-selenium*
+.pytest_cache
